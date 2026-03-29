@@ -1,6 +1,12 @@
 #ifndef TUPLE_H
 #define TUPLE_H
 
+#include <cmath>
+
+#define VERY_SMALL_NUMBER std::pow(10, -10)
+
+bool float_equal(double x, double y);
+
 class Tuple {
   double m_x, m_y, m_z, m_w;
 
