@@ -10,11 +10,14 @@ FetchContent_MakeAvailable(googletest)
 
 enable_testing()
 
-# add_library()
-# target_include_directories()
+add_library(raytracer src/tuple.cpp)
+target_include_directories(raytracer PUBLIC src)
 
 add_executable(main src/main.cpp)
-# target_link_libraries()
+target_link_libraries(main PRIVATE raytracer)
+
+add_executable(raytracer_tests tests/test_tuple.cpp)
+target_link_libraries(raytracer_tests PRIVATE raytracer GTest::gtest_main)
 
 include(GoogleTest)
-# gtest_discover_tests()
+gtest_discover_tests(raytracer_tests)
