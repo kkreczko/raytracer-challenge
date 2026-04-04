@@ -108,6 +108,38 @@ TEST(Vector, magnitude5) {
   EXPECT_TRUE(v.magnitude() == std::sqrt(14));
 }
 
+TEST(Vector, normalize1) {
+  Vector v = Vector(4, 0, 0);
+  EXPECT_TRUE(v.normalize() == Vector(1, 0, 0));
+}
+
+TEST(Vector, normalize2) {
+  double exp_x, exp_y, exp_z;
+  Vector v = Vector(1, 2, 3);
+  exp_x = 1 / std::sqrt(14);
+  exp_y = 2 / std::sqrt(14);
+  exp_z = 3 / std::sqrt(14);
+  EXPECT_TRUE(v.normalize() == Vector(exp_x, exp_y, exp_z));
+}
+
+TEST(Vector, magnitudeOfNormalizedVector) {
+  Vector v = Vector(1, 2, 3);
+  EXPECT_TRUE(v.normalize().magnitude() == 1);
+}
+
+TEST(Vector, dotProduct) {
+  Vector a = Vector(1, 2, 3);
+  Vector b = Vector(2, 3, 4);
+  EXPECT_TRUE(Tuple::dot(a, b) == 20);
+}
+
+TEST(Vector, crossProduct) {
+  Vector a = Vector(1, 2, 3);
+  Vector b = Vector(2, 3, 4);
+  EXPECT_TRUE(Vector::cross(a, b) == Vector(-1, 2, -1));
+  EXPECT_TRUE(Vector::cross(b, a) == Vector(1, -2, 1));
+}
+
 TEST(Misc, floatEqualityCheck) {
   double a = 0.1;
   double b = 0.2;
