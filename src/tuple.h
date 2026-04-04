@@ -19,10 +19,10 @@ public:
 
   virtual ~Tuple() = default;
 
-  bool operator==(const Tuple &rhs);
-  Tuple operator+(const Tuple &rhs) const;
-  Tuple operator-(const Tuple &rhs) const;
-  friend Tuple operator!(const Tuple &lhs);
+  bool operator==(const Tuple &rhs) const;
+  Tuple &operator+(const Tuple &rhs);
+  Tuple &operator-(const Tuple &rhs);
+  Tuple &operator-();
 };
 
 class Point : public Tuple {
