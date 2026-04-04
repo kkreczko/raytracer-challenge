@@ -68,6 +68,46 @@ TEST(Tuple, negateTuple) {
   EXPECT_TRUE(-a == Tuple(-1, 2, -3, 4));
 }
 
+TEST(Tuple, scalarMultiplication) {
+  Tuple a = {1, -2, 3, -4};
+  EXPECT_TRUE(a * 3.5 == Tuple(3.5, -7, 10.5, -14));
+}
+
+TEST(Tuple, fractionMultiplication) {
+  Tuple a = {1, -2, 3, -4};
+  EXPECT_TRUE(a * 0.5 == Tuple(0.5, -1, 1.5, -2));
+}
+
+TEST(Tuple, scalarDivision) {
+  Tuple a = {1, -2, 3, -4};
+  EXPECT_TRUE(a / 2 == Tuple(0.5, -1, 1.5, -2));
+}
+
+TEST(Vector, magnitude1) {
+  Vector v = Vector(1, 0, 0);
+  EXPECT_TRUE(v.magnitude() == 1);
+}
+
+TEST(Vector, magnitude2) {
+  Vector v = Vector(0, 1, 0);
+  EXPECT_TRUE(v.magnitude() == 1);
+}
+
+TEST(Vector, magnitude3) {
+  Vector v = Vector(0, 0, 1);
+  EXPECT_TRUE(v.magnitude() == 1);
+}
+
+TEST(Vector, magnitude4) {
+  Vector v = Vector(1, 2, 3);
+  EXPECT_TRUE(v.magnitude() == std::sqrt(14));
+}
+
+TEST(Vector, magnitude5) {
+  Vector v = Vector(-1, -2, -3);
+  EXPECT_TRUE(v.magnitude() == std::sqrt(14));
+}
+
 TEST(Misc, floatEqualityCheck) {
   double a = 0.1;
   double b = 0.2;

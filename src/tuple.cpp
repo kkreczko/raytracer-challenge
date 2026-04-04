@@ -35,3 +35,26 @@ Tuple &Tuple::operator-() {
   m_w = -m_w;
   return *this;
 }
+
+Tuple &Tuple::operator*(const double scalar) {
+  m_x *= scalar;
+  m_y *= scalar;
+  m_z *= scalar;
+  m_w *= scalar;
+  return *this;
+}
+
+Tuple &Tuple::operator/(const double scalar) {
+  *this * (1 / scalar);
+  return *this;
+}
+
+double Tuple::magnitude() const {
+  double vx, vy, vz, vw, result;
+  vx = std::pow(m_x, 2);
+  vy = std::pow(m_y, 2);
+  vz = std::pow(m_z, 2);
+  vw = std::pow(m_w, 2);
+  result = std::sqrt(vx + vy + vz + vw);
+  return result;
+}

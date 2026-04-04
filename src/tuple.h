@@ -2,6 +2,7 @@
 #define TUPLE_H
 
 #include <cmath>
+#include <iostream>
 
 #define VERY_SMALL_NUMBER std::pow(10, -10)
 
@@ -23,6 +24,12 @@ public:
   Tuple &operator+(const Tuple &rhs);
   Tuple &operator-(const Tuple &rhs);
   Tuple &operator-();
+  Tuple &operator*(const double scalar);
+  Tuple &operator/(const double scalar);
+
+  double magnitude() const;
+  double normalize() const;
+  double dot() const;
 };
 
 class Point : public Tuple {
