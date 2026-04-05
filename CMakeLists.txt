@@ -10,7 +10,7 @@ FetchContent_MakeAvailable(googletest)
 
 enable_testing()
 
-add_library(raytracer src/tuple.cpp)
+add_library(raytracer src/tuple.cpp src/canvas.cpp)
 target_include_directories(raytracer PUBLIC src)
 
 add_executable(projectiles src/projectiles.cpp)
@@ -19,7 +19,7 @@ target_link_libraries(projectiles PRIVATE raytracer)
 add_executable(main src/main.cpp)
 target_link_libraries(main PRIVATE raytracer)
 
-add_executable(raytracer_tests tests/test_tuple.cpp)
+add_executable(raytracer_tests tests/test_tuple.cpp tests/test_canvas.cpp)
 target_link_libraries(raytracer_tests PRIVATE raytracer GTest::gtest_main)
 
 include(GoogleTest)

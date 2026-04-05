@@ -30,7 +30,7 @@ int main() {
     Environment env = Environment(Vector(0, -0.1, 0), Vector(-0.01, 0, 0));
 
     while (!(proj.m_position.m_y <= 0)) {
-        std::this_thread::sleep_for(std::chrono::milliseconds(200));
+        std::this_thread::sleep_for(std::chrono::milliseconds(100));
         std::cout << "\r\033[K" << proj.m_position << std::flush;
         proj = tick(proj, env);
     }

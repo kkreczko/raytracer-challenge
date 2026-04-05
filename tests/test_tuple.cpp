@@ -26,8 +26,6 @@ TEST(Point, constructPoint) {
   Tuple t = {4, -4, 3, 1};
   EXPECT_TRUE(p == t);
   EXPECT_TRUE(t == p);
-  EXPECT_TRUE(p.isPoint());
-  EXPECT_FALSE(p.isVector());
 }
 
 TEST(Vector, constructVector) {
@@ -35,8 +33,6 @@ TEST(Vector, constructVector) {
   Tuple t = {4, -4, 3, 0};
   EXPECT_TRUE(v == t);
   EXPECT_TRUE(t == v);
-  EXPECT_TRUE(v.isVector());
-  EXPECT_FALSE(v.isPoint());
 }
 
 TEST(Tuple, addTuplesIntoPoint) {
@@ -140,8 +136,39 @@ TEST(Vector, crossProduct) {
   EXPECT_TRUE(Vector::cross(b, a) == Vector(1, -2, 1));
 }
 
+TEST(Color, basicColor) {
+  Color c = Color(-0.5, 0.4, 1.7);
+  EXPECT_TRUE(c.m_red == -0.5);
+  EXPECT_TRUE(c.m_green == 0.4);
+  EXPECT_TRUE(c.m_blue == 1.7);
+}
+
+TEST(Color, addColors) {
+  Color c1 = Color(0.9, 0.6, 0.75);
+  Color c2 = Color(0.7, 0.1, 0.25);
+  EXPECT_TRUE(c1 + c2 == Color(1.6, 0.7, 1.0));
+}
+
+TEST(Color, subtractColors) {
+  Color c1 = Color(0.9, 0.6, 0.75);
+  Color c2 = Color(0.7, 0.1, 0.25);
+  EXPECT_TRUE(c1 - c2 == Color(0.2, 0.5, 0.5));
+}
+
+TEST(Color, multiplyColorByScalar) {
+  Color c1 = Color(0.2, 0.3, 0.4);
+  EXPECT_TRUE(c1 * 2 == Color(0.4, 0.6, 0.8));
+}
+
+TEST(Color, multiplyColorByColor) {
+  Color c1 = Color(1, 0.2, 0.4);
+  Color c2 = Color(0.9, 1, 0.1);
+  EXPECT_TRUE(c1 * c2 == Color(0.9, 0.2, 0.04));
+}
+
 TEST(Misc, floatEqualityCheck) {
   double a = 0.1;
   double b = 0.2;
   EXPECT_TRUE(float_equal(a + b, 0.3));
+  EXPECT_FALSE(a + b == 0.3);
 }

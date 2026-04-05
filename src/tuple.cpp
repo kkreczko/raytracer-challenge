@@ -101,3 +101,10 @@ Vector Vector::cross(const Vector &lhs, const Vector &rhs) {
   res_z = lhs.m_x * rhs.m_y - lhs.m_y * rhs.m_x;
   return {res_x, res_y, res_z};
 }
+
+Tuple Tuple::operator*(const Tuple& rhs) const {
+  Color result = Color(m_x * rhs.m_x,
+                       m_y * rhs.m_y, 
+                       m_z * rhs.m_z);
+  return result;
+}

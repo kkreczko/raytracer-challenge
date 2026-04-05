@@ -28,6 +28,7 @@ struct Tuple {
 
   Tuple &operator*=(const double scalar);
   Tuple operator*(const double scalar) const;
+  Tuple operator*(const Tuple &rhs) const;
 
   Tuple &operator/=(const double scalar);
   Tuple operator/(const double scalar) const;
@@ -46,14 +47,28 @@ struct Tuple {
 
 struct Point : Tuple {
   Point(double x, double y, double z) : Tuple(x, y, z, 1.0) {}
-  Point(const Tuple &t) : Tuple(t.m_x, t.m_y, t.m_z, t.m_w) {}
+  Point(const Tuple &t) : Tuple(t.m_x, t.m_y, t.m_z, 1.0) {}
 };
 
 struct Vector : Tuple {
   Vector(double x, double y, double z) : Tuple(x, y, z, 0.0) {}
-  Vector(const Tuple &t) : Tuple(t.m_x, t.m_y, t.m_z, t.m_w) {}
+  Vector(const Tuple &t) : Tuple(t.m_x, t.m_y, t.m_z, 0.0) {}
 
   static Vector cross(const Vector &lhs, const Vector &rhs);
+};
+
+struct Color : Tuple {
+  double &m_red = m_x;
+  double &m_green = m_y;
+  double &m_blue = m_z;
+
+  Color(double red, double green, double blue) : Tuple(red, green, blue, 0.0) {}
+  Color(const Tuple &t) : Tuple(t.m_x, t.m_y, t.m_z, 0) {}
+
+  friend std::ostream& operator<<(std::ostream& os, const Color &c) {
+    os << "red = " << c.m_red << ", green = " << c.m_green << ", blue = " << c.m_blue;
+    return os;
+  };
 };
 
 #endif
