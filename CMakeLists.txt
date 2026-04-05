@@ -13,6 +13,9 @@ enable_testing()
 add_library(raytracer src/tuple.cpp)
 target_include_directories(raytracer PUBLIC src)
 
+add_executable(projectiles src/projectiles.cpp)
+target_link_libraries(projectiles PRIVATE raytracer)
+
 add_executable(main src/main.cpp)
 target_link_libraries(main PRIVATE raytracer)
 
