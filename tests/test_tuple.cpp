@@ -138,9 +138,9 @@ TEST(Vector, crossProduct) {
 
 TEST(Color, basicColor) {
   Color c = Color(-0.5, 0.4, 1.7);
-  EXPECT_TRUE(c.m_red == -0.5);
-  EXPECT_TRUE(c.m_green == 0.4);
-  EXPECT_TRUE(c.m_blue == 1.7);
+  EXPECT_TRUE(c.red() == -0.5);
+  EXPECT_TRUE(c.green() == 0.4);
+  EXPECT_TRUE(c.blue() == 1.7);
 }
 
 TEST(Color, addColors) {

@@ -58,15 +58,15 @@ struct Vector : Tuple {
 };
 
 struct Color : Tuple {
-  double &m_red = m_x;
-  double &m_green = m_y;
-  double &m_blue = m_z;
-
   Color(double red, double green, double blue) : Tuple(red, green, blue, 0.0) {}
   Color(const Tuple &t) : Tuple(t.m_x, t.m_y, t.m_z, 0) {}
 
+  double red() const{ return m_x; }
+  double green() const { return m_y; }
+  double blue() const { return m_z; }
+
   friend std::ostream& operator<<(std::ostream& os, const Color &c) {
-    os << "red = " << c.m_red << ", green = " << c.m_green << ", blue = " << c.m_blue;
+    os << "red = " << c.red() << ", green = " << c.green() << ", blue = " << c.blue();
     return os;
   };
 };
