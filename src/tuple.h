@@ -26,12 +26,12 @@ struct Tuple {
   Tuple operator-(const Tuple &rhs) const;
   Tuple operator-() const;
 
-  Tuple &operator*=(const double scalar);
-  Tuple operator*(const double scalar) const;
+  Tuple &operator*=(double scalar);
+  Tuple operator*(double scalar) const;
   Tuple operator*(const Tuple &rhs) const;
 
-  Tuple &operator/=(const double scalar);
-  Tuple operator/(const double scalar) const;
+  Tuple &operator/=(double scalar);
+  Tuple operator/(double scalar) const;
 
   double magnitude() const;
   Tuple &normalize();

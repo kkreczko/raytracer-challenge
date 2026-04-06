@@ -14,8 +14,9 @@ struct Canvas {
     Canvas(int width, int height) : m_width(width), m_height(height), 
                                     m_pixels(m_height, std::vector<Color>(m_width, Color(0, 0, 0))) {}
     
-    Color &getPixelAt(const int width, const int height);
-    void writePixelAt(const Color &pixel, const int width, const int height);
+    Color &getPixelAt(int x, int y);
+    const Color& getPixelAt(int x, int y) const;
+    void writePixelAt(const Color &pixel, int x, int y);
     void writeAllPixelsTo(const Color &pixel);
 
     std::string toPPM() const;

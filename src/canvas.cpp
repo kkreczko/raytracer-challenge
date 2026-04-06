@@ -6,18 +6,22 @@ int clamp(double value) {
     return static_cast<int>(std::round(value * 255));
 }
 
-Color &Canvas::getPixelAt(const int width, const int height) {
-    return m_pixels[height][width];
+Color &Canvas::getPixelAt(int x, int y) {
+    return m_pixels[y][x];
 }
 
-void Canvas::writePixelAt(const Color &pixel, const int width, const int height) {
-    m_pixels[height][width] = pixel;
+const Color &Canvas::getPixelAt(int x, int y) const {
+    return m_pixels[y][x];
+}
+
+void Canvas::writePixelAt(const Color &pixel, int x, int y) {
+    m_pixels[y][x] = pixel;
 }
 
 void Canvas::writeAllPixelsTo(const Color &pixel) {
-    for (int y = 0; y < m_height; y++) {
-        for (int x = 0; x < m_width; x++) {
-            m_pixels[y][x] = pixel;
+    for (int x = 0; x < m_width; x++) {
+        for (int y = 0; y < m_height; y++) {
+            writePixelAt(pixel, x, y);
         }
     }
 }
@@ -29,7 +33,7 @@ std::string Canvas::toPPM() const {
         std::ostringstream row;
         for (int x = 0; x < m_width; x++) {
             if (x > 0) row << " ";
-            const Color& c = m_pixels[y][x];
+            const Color& c = getPixelAt(x, y);
             row << clamp(c.red()) << " "
                 << clamp(c.green()) << " "
                 << clamp(c.blue());

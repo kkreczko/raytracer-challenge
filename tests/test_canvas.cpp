@@ -4,9 +4,9 @@
 TEST(Canvas, createCanvas) {
     Canvas c = Canvas(10, 20);
     int colorCounter = 0;
-    for (int width = 0; width < 10; width++) {
-        for (int height = 0; height < 20; height++) {
-            if (c.getPixelAt(width, height) == Color(0, 0, 0))
+    for (int x = 0; x < 10; x++) {
+        for (int y = 0; y < 20; y++) {
+            if (c.getPixelAt(x, y) == Color(0, 0, 0))
                 colorCounter += 1;
         } 
     }
@@ -27,9 +27,9 @@ TEST(Canvas, writeAllPixels) {
     Color red = Color(1, 0, 0);
     c.writeAllPixelsTo(red);
     int redCounter = 0;
-    for (int width = 0; width < c.m_width; width++) {
-        for (int height = 0; height < c.m_height; height++) {
-            if (c.getPixelAt(width, height) == red) redCounter++;
+    for (int x = 0; x < c.m_width; x++) {
+        for (int y = 0; y < c.m_height; y++) {
+            if (c.getPixelAt(x, y) == red) redCounter++;
         }
     }
     EXPECT_EQ(redCounter, 200);
