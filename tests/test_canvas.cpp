@@ -21,3 +21,38 @@ TEST(Canvas, writePixel) {
     c.writePixelAt(red, 2, 3);
     EXPECT_TRUE(c.getPixelAt(2, 3) == red);
 }
+
+TEST(Canvas, canvasToPPMBasic) {
+    Canvas c = Canvas(5, 3);
+    std::string ppm = c.toPPM();
+    std::istringstream stream(ppm);
+    std::string line1, line2, line3;
+    std::getline(stream, line1);
+    std::getline(stream, line2);
+    std::getline(stream, line3);
+    EXPECT_EQ(line1, "P3");
+    EXPECT_EQ(line2, "5 3");
+    EXPECT_EQ(line3, "255");
+}
+
+TEST(Canvas, canvasToPPM) {
+    Canvas c = Canvas(5, 3);
+    Color c1 = Color(1.5, 0, 0);
+    Color c2 = Color(0, 0.5, 0);
+    Color c3 = Color(-0.5, 0, 1);
+    c.writePixelAt(c1, 0, 0);
+    c.writePixelAt(c2, 2, 1);
+    c.writePixelAt(c3, 4, 2);
+    std::string ppm = c.toPPM();
+    std::istringstream stream(ppm);
+    std::string line1, line2, line3, line4, line5, line6;
+    std::getline(stream, line1);
+    std::getline(stream, line2);
+    std::getline(stream, line3);
+    std::getline(stream, line4);
+    std::getline(stream, line5);
+    std::getline(stream, line6);
+    EXPECT_EQ(line4, "255 0 0 0 0 0 0 0 0 0 0 0 0 0 0");
+    EXPECT_EQ(line5, "0 0 0 0 0 0 0 128 0 0 0 0 0 0 0");
+    EXPECT_EQ(line6, "0 0 0 0 0 0 0 0 0 0 0 0 0 0 255");
+}
