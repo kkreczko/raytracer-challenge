@@ -24,7 +24,7 @@ TEST(Canvas, writePixel) {
 
 TEST(Canvas, writeAllPixels) {
     Canvas c = Canvas(10, 20);
-    Color red = Color(1, 0, 0);
+    Color red = RED;
     c.writeAllPixelsTo(red);
     int redCounter = 0;
     for (int x = 0; x < c.m_width; x++) {

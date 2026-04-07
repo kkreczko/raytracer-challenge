@@ -1,6 +1,8 @@
 #include <chrono>
 #include <iostream>
 #include <thread>
+
+#include "canvas.h"
 #include "tuple.h"
 
 struct Projectile {
@@ -26,14 +28,16 @@ Projectile tick(const Projectile &before, const Environment &env) {
 }
 
 int main() {
+    Canvas canvas = Canvas(900, 550);
+    canvas.writeAllPixelsTo(BLACK);
+    
     Projectile proj = Projectile(Point(0, 1, 0), Vector(1, 1, 0).normalize());
     Environment env = Environment(Vector(0, -0.1, 0), Vector(-0.01, 0, 0));
 
     while (!(proj.m_position.m_y <= 0)) {
-        std::this_thread::sleep_for(std::chrono::milliseconds(100));
-        std::cout << "\r\033[K" << proj.m_position << std::flush;
+        canvas.writePixelAt(RED, 450, 275);
         proj = tick(proj, env);
     }
 
-    std::cout << std::endl;
+    canvas.saveToFile("projectile.ppm");
 }

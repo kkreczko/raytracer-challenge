@@ -6,6 +6,11 @@
 
 constexpr double EPSILON = 1e-10;
 
+#define BLACK Color(0, 0, 0)
+#define RED Color(1, 0, 0)
+#define GREEN Color(0, 1, 0)
+#define BLUE Color(0, 0, 1)
+
 bool float_equal(double x, double y);
 
 struct Tuple {
@@ -48,6 +53,8 @@ struct Tuple {
 struct Point : Tuple {
   Point(double x, double y, double z) : Tuple(x, y, z, 1.0) {}
   Point(const Tuple &t) : Tuple(t.m_x, t.m_y, t.m_z, 1.0) {}
+  int getXPosApprox() const;
+  int getYPosApprox() const;
 };
 
 struct Vector : Tuple {
