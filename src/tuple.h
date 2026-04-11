@@ -13,16 +13,18 @@ constexpr double EPSILON = 1e-10;
 #define GREEN Color(0, 1, 0)
 #define BLUE Color(0, 0, 1)
 
-bool float_equal(double x, double y);
+constexpr bool float_equal(double x, double y) {
+  return std::fabs(x - y) < EPSILON;
+}
 
 struct Tuple {
   double m_x, m_y, m_z, m_w;
 
-  Tuple(double x, double y, double z, double w)
+  constexpr Tuple(double x, double y, double z, double w)
       : m_x(x), m_y(y), m_z(z), m_w(w) {}
 
-  bool isPoint() const;
-  bool isVector() const;
+  constexpr bool isPoint() const { return m_w == 1.0; }
+  constexpr bool isVector() const { return m_w == 0.0; }
 
   bool operator==(const Tuple &rhs) const;
 
@@ -56,8 +58,8 @@ struct Tuple {
 struct Point : Tuple {
   Point(double x, double y, double z) : Tuple(x, y, z, 1.0) {}
   Point(const Tuple &t) : Tuple(t.m_x, t.m_y, t.m_z, 1.0) {}
-  int getXPosApprox() const;
-  int getYPosApprox() const;
+  constexpr int getXPosApprox() const { return std::round(m_x); }
+  constexpr int getYPosApprox() const { return std::round(m_y); };
 };
 
 struct Vector : Tuple {
