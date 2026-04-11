@@ -6,6 +6,8 @@
 
 constexpr double EPSILON = 1e-10;
 
+// switch to enum class
+// consteval consinit
 #define BLACK Color(0, 0, 0)
 #define RED Color(1, 0, 0)
 #define GREEN Color(0, 1, 0)
@@ -43,11 +45,12 @@ struct Tuple {
 
   static double dot(const Tuple &lhs, const Tuple &rhs);
 
-  friend std::ostream& operator<<(std::ostream& os, const Tuple &t) {
-    os << "x = " << t.m_x << ", y = " << t.m_y << ", z = " << t.m_z << ", w = " << t.m_w;
+  // std::format
+  friend std::ostream &operator<<(std::ostream &os, const Tuple &t) {
+    os << "x = " << t.m_x << ", y = " << t.m_y << ", z = " << t.m_z
+       << ", w = " << t.m_w;
     return os;
   };
-
 };
 
 struct Point : Tuple {
@@ -68,12 +71,13 @@ struct Color : Tuple {
   Color(double red, double green, double blue) : Tuple(red, green, blue, 0.0) {}
   Color(const Tuple &t) : Tuple(t.m_x, t.m_y, t.m_z, 0) {}
 
-  double red() const{ return m_x; }
+  double red() const { return m_x; }
   double green() const { return m_y; }
   double blue() const { return m_z; }
 
-  friend std::ostream& operator<<(std::ostream& os, const Color &c) {
-    os << "red = " << c.red() << ", green = " << c.green() << ", blue = " << c.blue();
+  friend std::ostream &operator<<(std::ostream &os, const Color &c) {
+    os << "red = " << c.red() << ", green = " << c.green()
+       << ", blue = " << c.blue();
     return os;
   };
 };

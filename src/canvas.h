@@ -19,7 +19,6 @@ struct Canvas {
   const Color &getPixelAt(int x, int y) const;
   void writePixelAt(const Color &pixel, int x, int y);
   void writeAllPixelsTo(const Color &pixel);
-
   std::string toPPM() const;
   void saveToFile(const std::string &filename) const;
 };
