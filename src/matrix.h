@@ -16,9 +16,11 @@ template <typename T> struct Matrix {
                 "Items size do not match rows * columns");
     };
 
-    T operator[](int row, int col) const {
+    const T operator[](int row, int col) const {
         return m_items[row * m_columns + col];
     };
+
+    T &operator[](int row, int col) { return m_items[row * m_columns + col]; }
 };
 
 #endif
