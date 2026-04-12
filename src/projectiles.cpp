@@ -33,8 +33,7 @@ int main() {
   while (!(proj.m_position.m_y <= 0)) {
     int x = proj.m_position.getXPosApprox();
     int y = canvas.m_height - proj.m_position.getYPosApprox();
-    if (x >= 0 && x < canvas.m_width && y >= 0 && y < canvas.m_height)
-      canvas.writePixelAt(RED, x, y);
+    canvas.writePixelAt(RED, x, y);
     proj = tick(proj, env);
   }
 

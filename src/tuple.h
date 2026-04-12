@@ -13,6 +13,13 @@ constexpr double EPSILON = 1e-10;
 #define GREEN Color(0, 1, 0)
 #define BLUE Color(0, 0, 1)
 
+enum class Colors {
+  Black,
+  Red,
+  Green,
+  Blue,
+};
+
 constexpr bool float_equal(double x, double y) {
   return std::fabs(x - y) < EPSILON;
 }
