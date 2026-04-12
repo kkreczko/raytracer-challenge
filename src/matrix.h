@@ -11,7 +11,7 @@ template <typename T> struct Matrix {
 
     Matrix(int rows, int columns, std::vector<T> items)
         : m_rows(rows), m_columns(columns), m_items(std::move(items)) {
-        if (rows * columns != items.size())
+        if (rows * columns != static_cast<int>(items.size()))
             throw std::invalid_argument(
                 "Items size do not match rows * columns");
     };
