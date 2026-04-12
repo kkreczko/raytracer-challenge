@@ -1,98 +1,100 @@
 #include "tuple.h"
 
 bool Tuple::operator==(const Tuple &rhs) const {
-  return float_equal(this->m_x, rhs.m_x) && float_equal(this->m_y, rhs.m_y) &&
-         float_equal(this->m_z, rhs.m_z) && float_equal(this->m_w, rhs.m_w);
+    return float_equal(this->m_x, rhs.m_x) && float_equal(this->m_y, rhs.m_y) &&
+           float_equal(this->m_z, rhs.m_z) && float_equal(this->m_w, rhs.m_w);
 }
 
 Tuple &Tuple::operator+=(const Tuple &rhs) {
-  m_x += rhs.m_x;
-  m_y += rhs.m_y;
-  m_z += rhs.m_z;
-  m_w += rhs.m_w;
-  return *this;
+    m_x += rhs.m_x;
+    m_y += rhs.m_y;
+    m_z += rhs.m_z;
+    m_w += rhs.m_w;
+    return *this;
 }
 
 Tuple &Tuple::operator-=(const Tuple &rhs) {
-  m_x -= rhs.m_x;
-  m_y -= rhs.m_y;
-  m_z -= rhs.m_z;
-  m_w -= rhs.m_w;
-  return *this;
+    m_x -= rhs.m_x;
+    m_y -= rhs.m_y;
+    m_z -= rhs.m_z;
+    m_w -= rhs.m_w;
+    return *this;
 }
 
 Tuple Tuple::operator+(const Tuple &rhs) const {
-  Tuple result = *this;
-  result += rhs;
-  return result;
+    Tuple result = *this;
+    result += rhs;
+    return result;
 }
 
 Tuple Tuple::operator-(const Tuple &rhs) const {
-  Tuple result = *this;
-  result -= rhs;
-  return result;
+    Tuple result = *this;
+    result -= rhs;
+    return result;
 }
 
 Tuple Tuple::operator-() const { return {-m_x, -m_y, -m_z, -m_w}; }
 
 Tuple &Tuple::operator*=(const double scalar) {
-  m_x *= scalar;
-  m_y *= scalar;
-  m_z *= scalar;
-  m_w *= scalar;
-  return *this;
+    m_x *= scalar;
+    m_y *= scalar;
+    m_z *= scalar;
+    m_w *= scalar;
+    return *this;
 }
 
 Tuple Tuple::operator*(const double scalar) const {
-  return {m_x * scalar, m_y * scalar, m_z * scalar, m_w * scalar};
+    return {m_x * scalar, m_y * scalar, m_z * scalar, m_w * scalar};
 }
 
 Tuple &Tuple::operator/=(const double scalar) {
-  *this *= (1 / scalar);
-  return *this;
+    *this *= (1 / scalar);
+    return *this;
 }
 
 Tuple Tuple::operator/(const double scalar) const {
-  Tuple t = *this;
-  t /= scalar;
-  return t;
+    Tuple t = *this;
+    t /= scalar;
+    return t;
 }
 
 double Tuple::magnitude() const {
-  double vx, vy, vz, vw, result;
-  vx = std::pow(m_x, 2);
-  vy = std::pow(m_y, 2);
-  vz = std::pow(m_z, 2);
-  vw = std::pow(m_w, 2);
-  result = std::sqrt(vx + vy + vz + vw);
-  return result;
+    double vx, vy, vz, vw, result;
+    vx = m_x * m_x;
+    vy = m_y * m_y;
+    vz = m_z * m_z;
+    vw = m_w * m_w;
+    result = std::sqrt(vx + vy + vz + vw);
+    return result;
 }
 
-Tuple &Tuple::normalize() {
-  double mag = magnitude();
-  m_x /= mag;
-  m_y /= mag;
-  m_z /= mag;
-  m_w /= mag;
-  return *this;
+Tuple Tuple::normalize() const {
+    double mag = magnitude();
+    Tuple t = *this;
+    t.m_x /= mag;
+    t.m_y /= mag;
+    t.m_z /= mag;
+    t.m_w /= mag;
+    return t;
 }
 
 double Tuple::dot(const Tuple &lhs, const Tuple &rhs) {
-  double result;
-  result = lhs.m_x * rhs.m_x + lhs.m_y * rhs.m_y + lhs.m_z * rhs.m_z +
-           lhs.m_w * rhs.m_w;
-  return result;
+    double result;
+    result = lhs.m_x * rhs.m_x + lhs.m_y * rhs.m_y + lhs.m_z * rhs.m_z +
+             lhs.m_w * rhs.m_w;
+    return result;
 }
 
 Vector Vector::cross(const Vector &lhs, const Vector &rhs) {
-  double res_x, res_y, res_z;
-  res_x = lhs.m_y * rhs.m_z - lhs.m_z * rhs.m_y;
-  res_y = lhs.m_z * rhs.m_x - lhs.m_x * rhs.m_z;
-  res_z = lhs.m_x * rhs.m_y - lhs.m_y * rhs.m_x;
-  return {res_x, res_y, res_z};
+    double res_x, res_y, res_z;
+    res_x = lhs.m_y * rhs.m_z - lhs.m_z * rhs.m_y;
+    res_y = lhs.m_z * rhs.m_x - lhs.m_x * rhs.m_z;
+    res_z = lhs.m_x * rhs.m_y - lhs.m_y * rhs.m_x;
+    return {res_x, res_y, res_z};
 }
 
 Tuple Tuple::operator*(const Tuple &rhs) const {
-  Color result = Color(m_x * rhs.m_x, m_y * rhs.m_y, m_z * rhs.m_z);
-  return result;
+    Tuple result =
+        Tuple(m_x * rhs.m_x, m_y * rhs.m_y, m_z * rhs.m_z, m_w * rhs.m_w);
+    return result;
 }
