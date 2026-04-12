@@ -6,13 +6,6 @@
 
 constexpr double EPSILON = 1e-10;
 
-// switch to enum class
-// consteval consinit
-#define BLACK Color(0, 0, 0)
-#define RED Color(1, 0, 0)
-#define GREEN Color(0, 1, 0)
-#define BLUE Color(0, 0, 1)
-
 enum class Colors {
     Black,
     Red,

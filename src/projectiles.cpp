@@ -25,7 +25,7 @@ Projectile tick(const Projectile &before, const Environment &env) {
 
 int main() {
     Canvas canvas = Canvas(1920, 1080);
-    canvas.writeAllPixelsTo(BLACK);
+    canvas.writeAllPixelsTo(Color(0, 0, 0));
     Projectile proj =
         Projectile(Point(0, 0.001, 0), Vector(1, 1, 0).normalize() * 23);
     Environment env = Environment(Vector(0, -0.1, 0), Vector(-0.01, 0, 0));
@@ -33,7 +33,7 @@ int main() {
     while (!(proj.m_position.m_y <= 0)) {
         int x = Canvas::approxPosition(proj.m_position.m_x);
         int y = canvas.m_height - Canvas::approxPosition(proj.m_position.m_y);
-        canvas.writePixelAt(RED, x, y);
+        canvas.writePixelAt(Color(0, 1, 0), x, y);
         proj = tick(proj, env);
     }
 

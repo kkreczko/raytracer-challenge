@@ -8,7 +8,7 @@ TEST(Canvas, createCanvas) {
         for (int y = 0; y < 20; y++) {
             if (c.getPixelAt(x, y) == Color(0, 0, 0))
                 colorCounter += 1;
-        } 
+        }
     }
     EXPECT_TRUE(colorCounter == 200);
     EXPECT_TRUE(c.m_height == 20);
@@ -24,12 +24,13 @@ TEST(Canvas, writePixel) {
 
 TEST(Canvas, writeAllPixels) {
     Canvas c = Canvas(10, 20);
-    Color red = RED;
+    Color red = Color(1, 0, 0);
     c.writeAllPixelsTo(red);
     int redCounter = 0;
     for (int x = 0; x < c.m_width; x++) {
         for (int y = 0; y < c.m_height; y++) {
-            if (c.getPixelAt(x, y) == red) redCounter++;
+            if (c.getPixelAt(x, y) == red)
+                redCounter++;
         }
     }
     EXPECT_EQ(redCounter, 200);
@@ -83,9 +84,13 @@ TEST(CanvasPPM, splittingLines) {
     std::getline(stream, line5);
     std::getline(stream, line6);
     std::getline(stream, line7);
-    EXPECT_EQ(line4, "255 204 153 255 204 153 255 204 153 255 204 153 255 204 153 255 204");
+    EXPECT_EQ(
+        line4,
+        "255 204 153 255 204 153 255 204 153 255 204 153 255 204 153 255 204");
     EXPECT_EQ(line5, "153 255 204 153 255 204 153 255 204 153 255 204 153");
-    EXPECT_EQ(line6, "255 204 153 255 204 153 255 204 153 255 204 153 255 204 153 255 204");
+    EXPECT_EQ(
+        line6,
+        "255 204 153 255 204 153 255 204 153 255 204 153 255 204 153 255 204");
     EXPECT_EQ(line7, "153 255 204 153 255 204 153 255 204 153 255 204 153");
 }
 

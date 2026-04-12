@@ -1,7 +1,7 @@
 #ifndef MATRIX_H
 #define MATRIX_H
 
-#include <iostream>
+#include <stdexcept>
 #include <vector>
 
 template <typename T> struct Matrix {
@@ -9,13 +9,11 @@ template <typename T> struct Matrix {
     int m_columns;
     std::vector<T> m_items;
 
-    Matrix(int rows, int columns, std::vector<T> items) {
-        if (m_rows * m_columns == items.size()) {
-            m_rows = rows;
-            m_columns = columns;
-            m_items = std::move(items);
-        } else
-            std::cerr << "Matrix items do not match matrix size";
+    Matrix(int rows, int columns, std::vector<T> items)
+        : m_rows(rows), m_columns(columns), m_items(std::move(items)) {
+        if (rows * columns != items.size())
+            throw std::invalid_argument(
+                "Items size do not match rows * columns");
     };
 
     T operator[](int row, int col) const {
