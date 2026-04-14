@@ -2,4 +2,3 @@ build/
 *.ppm
 tests/Testing/
 .clangd
-.clang-format

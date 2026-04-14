@@ -4,6 +4,8 @@
 #include <stdexcept>
 #include <vector>
 
+#include "tuple.h"
+
 template <typename T> struct Matrix {
     int m_rows;
     int m_columns;
@@ -21,6 +23,18 @@ template <typename T> struct Matrix {
     };
 
     T &operator[](int row, int col) { return m_items[row * m_columns + col]; }
+
+    bool operator==(const Matrix &rhs) const {
+        if (m_items.size() != rhs.m_items.size())
+            return false;
+
+        for (int i = 0; i < m_items.size(); i++) {
+            if (!float_equal(m_items[i], rhs.m_items[i]))
+                return false;
+        }
+
+        return true;
+    }
 };
 
 #endif

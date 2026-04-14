@@ -13,7 +13,7 @@ enum class Colors {
     Blue,
 };
 
-constexpr bool float_equal(double x, double y) {
+template <typename T> constexpr bool float_equal(T x, T y) {
     return std::fabs(x - y) < EPSILON;
 }
 

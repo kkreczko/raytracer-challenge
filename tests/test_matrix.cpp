@@ -22,3 +22,48 @@ TEST(Matrix, basicMatrix) {
     EXPECT_EQ(item6, 13.5);
     EXPECT_EQ(item7, 15.5);
 }
+
+TEST(Matrix, twoByTwoMatrix) {
+    Matrix m = Matrix(2, 2, std::vector<int>({-3, 5, 1, -2}));
+    int item1 = m[0, 0];
+    int item2 = m[0, 1];
+    int item3 = m[1, 0];
+    int item4 = m[1, 1];
+    EXPECT_EQ(item1, -3);
+    EXPECT_EQ(item2, 5);
+    EXPECT_EQ(item3, 1);
+    EXPECT_EQ(item4, -2);
+}
+
+TEST(Matrix, threeByThreeMatrix) {
+    Matrix m = Matrix(3, 3, std::vector<int>({-3, 5, 0, 1, -2, -7, 0, 1, 1}));
+    int item1 = m[0, 0];
+    int item2 = m[1, 1];
+    int item3 = m[2, 2];
+    EXPECT_EQ(item1, -3);
+    EXPECT_EQ(item2, -2);
+    EXPECT_EQ(item3, 1);
+}
+
+TEST(Matrix, equalMatrices) {
+    Matrix m1 =
+        Matrix(4, 4,
+               std::vector<double>({1, 2, 3, 4, 5.5, 6.5, 7.5, 8.5, 9, 10, 11,
+                                    12, 13.5, 14.5, 15.5, 16.5}));
+    Matrix m2 =
+        Matrix(4, 4,
+               std::vector<double>({1, 2, 3, 4, 5.5, 6.5, 7.5, 8.5, 9, 10, 11,
+                                    12, 13.5, 14.5, 15.5, 16.5}));
+    EXPECT_TRUE(m1 == m2);
+}
+
+TEST(Matrix, notEqualMatrices) {
+    Matrix m1 =
+        Matrix(4, 4,
+               std::vector<double>({1, 2, 3, 4, 5.5, 6.5, 7.5, 8.5, 9, 10, 11,
+                                    12, 13.5, 14.5, 15.5, 16.5}));
+    Matrix m2 = Matrix(4, 4,
+                       std::vector<double>({1, 2, 3, 4, 5.5, 6.5, 7.5, 8.5, 9,
+                                            10, 11, 12, 69, 14.5, 15.5, 16.5}));
+    EXPECT_FALSE(m1 == m2);
+}
