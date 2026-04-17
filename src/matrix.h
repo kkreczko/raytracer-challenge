@@ -22,7 +22,7 @@ template <typename T> struct Matrix {
         return m_items[row * m_columns + col];
     };
 
-    T &operator[](int row, int col) { return m_items[row * m_columns + col]; }
+    const T &operator[](int row, int col) { return m_items[row * m_columns + col]; }
 
     bool operator==(const Matrix &rhs) const {
         if (m_items.size() != rhs.m_items.size())
@@ -35,6 +35,11 @@ template <typename T> struct Matrix {
 
         return true;
     }
+
+    Matrix operator*(const Matrix &rhs) const { 
+      return Matrix(1, 1, std::vector<T>({1})); 
+    };
+    Matrix &operator*=(const Matrix &rhs);
 };
 
 #endif

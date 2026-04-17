@@ -67,3 +67,10 @@ TEST(Matrix, notEqualMatrices) {
                                             10, 11, 12, 69, 14.5, 15.5, 16.5}));
     EXPECT_FALSE(m1 == m2);
 }
+
+TEST(Matrix, multiplyMatrices) {
+    Matrix m1 = Matrix(4, 4, std::vector<double>({1, 2, 3, 4, 5, 6, 7, 8, 9, 8, 7, 6, 5, 4, 3, 2}));
+    Matrix m2 = Matrix(4, 4, std::vector<double>({-2, 1, 2, 3, 3, 2, 1, -1, 4, 3, 6, 5, 1, 2, 7, 8}));
+    Matrix result = Matrix(4, 4, std::vector<double>({20, 22, 50, 48, 44, 54, 114, 108, 40, 58, 110, 102, 16, 26, 46, 42}));
+    EXPECT_EQ(m1 * m2, result);
+}
