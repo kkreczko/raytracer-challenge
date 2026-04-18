@@ -18,11 +18,11 @@ template <typename T> struct Matrix {
                 "Items size do not match rows * columns");
     };
 
-    const T operator[](int row, int col) const {
+    const T &operator[](int row, int col) const {
         return m_items[row * m_columns + col];
     };
 
-    const T &operator[](int row, int col) { return m_items[row * m_columns + col]; }
+    T &operator[](int row, int col) { return m_items[row * m_columns + col]; }
 
     bool operator==(const Matrix &rhs) const {
         if (m_items.size() != rhs.m_items.size())
@@ -36,9 +36,24 @@ template <typename T> struct Matrix {
         return true;
     }
 
-    Matrix operator*(const Matrix &rhs) const { 
-      return Matrix(1, 1, std::vector<T>({1})); 
+    Matrix operator*(const Matrix &rhs) const {
+        if (m_columns != rhs.m_rows)
+            throw std::invalid_argument(
+                "Invalid matrices sizes in multiplication");
+        Matrix result = Matrix(m_rows, rhs.m_columns,
+                               std::vector<T>(m_rows * rhs.m_columns, T{}));
+
+        for(int i = 0; i < m_rows; ++i){
+            for(int j = 0; j < rhs.m_columns; ++j){
+                for(int k = 0; k < m_columns; ++k) {
+                    result[i, j] += (*this)[i, k] * rhs[k, j];
+                }
+            }
+        }
+
+        return result;
     };
+
     Matrix &operator*=(const Matrix &rhs);
 };
 
