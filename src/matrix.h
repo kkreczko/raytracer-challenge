@@ -54,7 +54,10 @@ template <typename T> struct Matrix {
         return result;
     };
 
-    Matrix &operator*=(const Matrix &rhs);
+    Matrix &operator*=(const Matrix &rhs) {
+        *this = *this * rhs;
+        return *this;
+    };
 };
 
 #endif
