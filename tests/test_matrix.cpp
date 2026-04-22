@@ -90,3 +90,11 @@ TEST(Matrix, multiplyByTuple) {
     Tuple expected = Tuple(18, 24, 33, 1);
     EXPECT_EQ(A * b, expected);
 }
+
+TEST(Matrix, testIdentMatrx) {
+    Matrix A = Matrix(4, 4,
+                      std::vector<double>(
+                          {0, 1, 2, 4, 1, 2, 4, 8, 2, 4, 8, 16, 4, 8, 16, 32}));
+    IdentMatrix identity_matrix = IdentMatrix<double>(4);
+    EXPECT_EQ(A * identity_matrix, A);
+}

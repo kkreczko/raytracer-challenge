@@ -62,4 +62,11 @@ template <typename T> struct Matrix {
 
 Tuple operator*(const Matrix<double> &, const Tuple &);
 
+template <typename T> struct IdentMatrix : Matrix<T> {
+    IdentMatrix(int dim) : Matrix<T>(dim, dim, std::vector<T>(dim * dim, 0)) {
+        for (int i = 0; i < dim; i++)
+            (*this)[i, i] = static_cast<T>(1);
+    };
+};
+
 #endif
