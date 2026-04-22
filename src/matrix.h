@@ -43,9 +43,9 @@ template <typename T> struct Matrix {
         Matrix result = Matrix(m_rows, rhs.m_columns,
                                std::vector<T>(m_rows * rhs.m_columns, T{}));
 
-        for(int i = 0; i < m_rows; ++i){
-            for(int j = 0; j < rhs.m_columns; ++j){
-                for(int k = 0; k < m_columns; ++k) {
+        for (int i = 0; i < m_rows; ++i) {
+            for (int j = 0; j < rhs.m_columns; ++j) {
+                for (int k = 0; k < m_columns; ++k) {
                     result[i, j] += (*this)[i, k] * rhs[k, j];
                 }
             }
@@ -59,5 +59,7 @@ template <typename T> struct Matrix {
         return *this;
     };
 };
+
+Tuple operator*(const Matrix<double> &, const Tuple &);
 
 #endif

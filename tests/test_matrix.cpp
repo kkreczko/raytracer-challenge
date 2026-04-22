@@ -69,8 +69,24 @@ TEST(Matrix, notEqualMatrices) {
 }
 
 TEST(Matrix, multiplyMatrices) {
-    Matrix m1 = Matrix(4, 4, std::vector<double>({1, 2, 3, 4, 5, 6, 7, 8, 9, 8, 7, 6, 5, 4, 3, 2}));
-    Matrix m2 = Matrix(4, 4, std::vector<double>({-2, 1, 2, 3, 3, 2, 1, -1, 4, 3, 6, 5, 1, 2, 7, 8}));
-    Matrix result = Matrix(4, 4, std::vector<double>({20, 22, 50, 48, 44, 54, 114, 108, 40, 58, 110, 102, 16, 26, 46, 42}));
+    Matrix m1 = Matrix(
+        4, 4,
+        std::vector<double>({1, 2, 3, 4, 5, 6, 7, 8, 9, 8, 7, 6, 5, 4, 3, 2}));
+    Matrix m2 = Matrix(4, 4,
+                       std::vector<double>(
+                           {-2, 1, 2, 3, 3, 2, 1, -1, 4, 3, 6, 5, 1, 2, 7, 8}));
+    Matrix result =
+        Matrix(4, 4,
+               std::vector<double>({20, 22, 50, 48, 44, 54, 114, 108, 40, 58,
+                                    110, 102, 16, 26, 46, 42}));
     EXPECT_EQ(m1 * m2, result);
+}
+
+TEST(Matrix, multiplyByTuple) {
+    Matrix A = Matrix(
+        4, 4,
+        std::vector<double>({1, 2, 3, 4, 2, 4, 4, 2, 8, 6, 4, 1, 0, 0, 0, 1}));
+    Tuple b = Tuple(1, 2, 3, 1);
+    Tuple expected = Tuple(18, 24, 33, 1);
+    EXPECT_EQ(A * b, expected);
 }
