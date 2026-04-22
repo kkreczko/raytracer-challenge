@@ -58,6 +58,9 @@ template <typename T> struct Matrix {
         *this = *this * rhs;
         return *this;
     };
+
+    Matrix transpose();
+    Matrix invert();
 };
 
 Tuple operator*(const Matrix<double> &, const Tuple &);
