@@ -104,3 +104,8 @@ TEST(Matrix, identMatrixMultipliedByTuple) {
     Tuple a = Tuple(1, 2, 3, 4);
     EXPECT_EQ(identity_matrix * a, a);
 }
+
+TEST(Matrix, smolDeterminant) {
+    Matrix A = Matrix(2, 2, std::vector<double>({1, 5, -3, 2}));
+    EXPECT_EQ(A.det(), 17);
+}
