@@ -1,4 +1,5 @@
 #include "canvas.h"
+#include <stdexcept>
 
 int clamp(double value) {
     if (value < 0)
@@ -8,9 +9,17 @@ int clamp(double value) {
     return static_cast<int>(std::round(value * 255));
 }
 
-Color &Canvas::getPixelAt(int x, int y) { return (*this)[y, x]; }
+Color &Canvas::getPixelAt(int x, int y) {
+    if (x >= 0 && x < m_width && y >= 0 && y < m_height)
+        return (*this)[y, x];
+    throw std::invalid_argument("Pixel out of bounds");
+}
 
-const Color Canvas::getPixelAt(int x, int y) const { return (*this)[y, x]; }
+const Color Canvas::getPixelAt(int x, int y) const {
+    if (x >= 0 && x < m_width && y >= 0 && y < m_height)
+        return (*this)[y, x];
+    throw std::invalid_argument("Pixel out of bounds");
+}
 
 void Canvas::writePixelAt(const Color &pixel, int x, int y) {
     if (x >= 0 && x < m_width && y >= 0 && y < m_height)

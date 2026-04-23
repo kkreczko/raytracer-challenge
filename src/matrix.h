@@ -28,6 +28,9 @@ template <typename T> struct Matrix {
         if (m_items.size() != rhs.m_items.size())
             return false;
 
+        if (m_rows != rhs.m_rows || m_columns != rhs.m_columns)
+            return false;
+
         for (int i = 0; i < m_items.size(); i++) {
             if (!float_equal(m_items[i], rhs.m_items[i]))
                 return false;
