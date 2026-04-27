@@ -62,6 +62,28 @@ template <typename T> struct Matrix {
         return *this;
     };
 
+    Matrix submatrix(int row, int column) const {
+        if (m_columns != m_rows)
+            throw std::invalid_argument(
+                "Submatrix allowed only for square matrices");
+        int new_dim = m_rows - 1;
+        std::vector<T> resVec(new_dim * new_dim, 0);
+        for (int i = 0; i < m_rows; i++)
+            for (int j = 0; j < m_columns; j++)
+                if (i != row && j != column) {
+                    resVec.push_back((*this)[i, j]);
+                }
+        return Matrix(new_dim, new_dim, resVec);
+    };
+
+    static Matrix ident(int dim) {
+        Matrix res = Matrix<T>(dim, dim, std::vector<T>(dim * dim, 0));
+        for (int i = 0; i < dim; i++) {
+            res[i, i] = static_cast<T>(1);
+        }
+        return res;
+    }
+
     // 2x2 det for now
     T det() const {
         return (*this)[0, 0] * (*this)[1, 1] - (*this)[0, 1] * (*this)[1, 0];
@@ -72,12 +94,5 @@ template <typename T> struct Matrix {
 };
 
 Tuple operator*(const Matrix<double> &, const Tuple &);
-
-template <typename T> struct IdentMatrix : Matrix<T> {
-    IdentMatrix(int dim) : Matrix<T>(dim, dim, std::vector<T>(dim * dim, 0)) {
-        for (int i = 0; i < dim; i++)
-            (*this)[i, i] = static_cast<T>(1);
-    };
-};
 
 #endif
