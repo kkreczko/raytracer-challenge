@@ -75,13 +75,14 @@ template <typename T> struct Matrix {
         if (m_columns != m_rows)
             throw std::invalid_argument(
                 "Submatrix allowed only for square matrices");
-        int new_dim = m_rows - 1;
+
         std::vector<T> resVec;
         for (int i = 0; i < m_rows; i++)
             for (int j = 0; j < m_columns; j++)
-                if (i != row && j != column) {
+                if (i != row && j != column)
                     resVec.push_back((*this)[i, j]);
-                }
+
+        int new_dim = m_rows - 1;
         return Matrix(new_dim, new_dim, resVec);
     };
 
@@ -90,8 +91,15 @@ template <typename T> struct Matrix {
         return (*this)[0, 0] * (*this)[1, 1] - (*this)[0, 1] * (*this)[1, 0];
     };
 
+    // Works only on three by three matrices for now
     T minor(int row, int column) const {
         return this->submatrix(row, column).det();
+    }
+
+    T cofactor(int row, int column) const {
+        if (row + column % 2 != 0)
+            return -this->minor(row, column);
+        return this->minor(row, column);
     }
 
     Matrix transpose();

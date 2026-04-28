@@ -130,3 +130,12 @@ TEST(Matrix, calculateMinor) {
         Matrix(3, 3, std::vector<double>({3, 5, 0, 2, -1, -7, 6, -1, 5}));
     EXPECT_EQ(A.minor(1, 0), 25);
 }
+
+TEST(Matrix, calculateCofactorAndMinors) {
+    Matrix A =
+        Matrix(3, 3, std::vector<double>({3, 5, 0, 2, -1, -7, 6, -1, 5}));
+    EXPECT_EQ(A.minor(0, 0), -12);
+    EXPECT_EQ(A.cofactor(0, 0), -12);
+    EXPECT_EQ(A.minor(1, 0), 25);
+    EXPECT_EQ(A.cofactor(1, 0), -25);
+}
