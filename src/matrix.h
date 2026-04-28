@@ -67,7 +67,7 @@ template <typename T> struct Matrix {
             throw std::invalid_argument(
                 "Submatrix allowed only for square matrices");
         int new_dim = m_rows - 1;
-        std::vector<T> resVec(new_dim * new_dim, 0);
+        std::vector<T> resVec;
         for (int i = 0; i < m_rows; i++)
             for (int j = 0; j < m_columns; j++)
                 if (i != row && j != column) {
