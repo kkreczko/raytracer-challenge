@@ -124,3 +124,9 @@ TEST(Matrix, subMatrixFourByFour) {
         Matrix(3, 3, std::vector<double>({-6, 1, 6, -8, 8, 6, -7, -1, 1}));
     EXPECT_EQ(A.submatrix(2, 1), expected);
 }
+
+TEST(Matrix, calculateMinor) {
+    Matrix A =
+        Matrix(3, 3, std::vector<double>({3, 5, 0, 2, -1, -7, 6, -1, 5}));
+    EXPECT_EQ(A.minor(1, 0), 25);
+}
