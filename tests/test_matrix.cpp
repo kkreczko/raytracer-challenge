@@ -139,3 +139,22 @@ TEST(Matrix, calculateCofactorAndMinors) {
     EXPECT_EQ(A.minor(1, 0), 25);
     EXPECT_EQ(A.cofactor(1, 0), -25);
 }
+
+TEST(Matrix, threeByThreeDeterminant) {
+    Matrix A = Matrix(3, 3, std::vector<double>({1, 2, 6, -5, 8, -4, 2, 6, 4}));
+    EXPECT_EQ(A.cofactor(0, 0), 56);
+    EXPECT_EQ(A.cofactor(0, 1), 12);
+    EXPECT_EQ(A.cofactor(0, 2), -46);
+    EXPECT_EQ(A.det(), -196);
+}
+
+TEST(Matrix, fourByFourDeterminant) {
+    Matrix A = Matrix(4, 4,
+                      std::vector<double>({-2, -8, 3, 5, -3, 1, 7, 3, 1, 2, -9,
+                                           6, -6, 7, 7, -9}));
+    EXPECT_EQ(A.cofactor(0, 0), 690);
+    EXPECT_EQ(A.cofactor(0, 1), 447);
+    EXPECT_EQ(A.cofactor(0, 2), 210);
+    EXPECT_EQ(A.cofactor(0, 3), 51);
+    EXPECT_EQ(A.det(), -4071);
+}
