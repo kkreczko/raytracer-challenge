@@ -115,3 +115,12 @@ TEST(Matrix, subMatrixThreeByThree) {
     Matrix expected = Matrix(2, 2, std::vector<double>({-3, 2, 0, 6}));
     EXPECT_EQ(A.submatrix(0, 2), expected);
 }
+
+TEST(Matrix, subMatrixFourByFour) {
+    Matrix A = Matrix(4, 4,
+                      std::vector<double>({-6, 1, 1, 6, -8, 5, 8, 6, -1, 0, 8,
+                                           2, -7, 1, -1, 1}));
+    Matrix expected =
+        Matrix(3, 3, std::vector<double>({-6, 1, 6, -8, 8, 6, -7, -1, 1}));
+    EXPECT_EQ(A.submatrix(2, 1), expected);
+}

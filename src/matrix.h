@@ -18,6 +18,15 @@ template <typename T> struct Matrix {
                 "Items size do not match rows * columns");
     };
 
+    // Identity factory
+    static Matrix ident(int dim) {
+        Matrix res = Matrix<T>(dim, dim, std::vector<T>(dim * dim, 0));
+        for (int i = 0; i < dim; i++) {
+            res[i, i] = static_cast<T>(1);
+        }
+        return res;
+    }
+
     const T &operator[](int row, int col) const {
         return m_items[row * m_columns + col];
     };
@@ -76,15 +85,7 @@ template <typename T> struct Matrix {
         return Matrix(new_dim, new_dim, resVec);
     };
 
-    static Matrix ident(int dim) {
-        Matrix res = Matrix<T>(dim, dim, std::vector<T>(dim * dim, 0));
-        for (int i = 0; i < dim; i++) {
-            res[i, i] = static_cast<T>(1);
-        }
-        return res;
-    }
-
-    // 2x2 det for now
+    // Two by two determinant
     T det() const {
         return (*this)[0, 0] * (*this)[1, 1] - (*this)[0, 1] * (*this)[1, 0];
     };
