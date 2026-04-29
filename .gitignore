@@ -4,3 +4,4 @@ tests/Testing/
 .clangd
 .cache
 Testing/
+.zed
