@@ -4,7 +4,7 @@
 #include <cmath>
 #include <iostream>
 
-constexpr double EPSILON = 1e-6;
+constexpr double EPSILON = 1e-5;
 
 enum class Colors {
     Black,

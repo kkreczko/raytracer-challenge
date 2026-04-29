@@ -108,7 +108,7 @@ template <typename T> struct Matrix {
     }
 
     T cofactor(int row, int column) const {
-        if (row + column % 2 != 0)
+        if ((row + column) % 2 != 0)
             return -this->minor(row, column);
         return this->minor(row, column);
     }
