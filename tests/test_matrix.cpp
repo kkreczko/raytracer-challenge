@@ -215,3 +215,16 @@ TEST(Matrix, inverseThird) {
                                                          0.17778, 0.06667, -0.26667, 0.33333}));
     EXPECT_TRUE(B == expected);
 }
+
+TEST(Matrix, multiplyByInverse) {
+    Matrix A = Matrix(4, 4, std::vector<double>({3, -9, 7, 3,
+                                                  3, -8, 2, -9,
+                                                  -4, 4, 4, 1,
+                                                  -6, 5, -1, 1}));
+    Matrix B = Matrix(4, 4, std::vector<double>({ 8, 2, 2, 2,
+                                                  3, -1, 7, 0,
+                                                  5, 4, 6, -2,
+                                                  0, 5, 0, 5}));
+    Matrix C = A * B;
+    EXPECT_TRUE(C * B.inverse() == A);
+}
