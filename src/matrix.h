@@ -113,9 +113,19 @@ template <typename T> struct Matrix {
         return this->minor(row, column);
     }
 
-    Matrix transpose();
+    Matrix inverse() const {
+        if (!canInvert())
+            throw std::invalid_argument("Matrix not possible to inverse");
 
-    Matrix invert();
+        Matrix res =
+            Matrix(m_rows, m_columns, std::vector<T>(m_columns * m_rows, 0));
+
+        for (int row = 0; row < m_rows; row++)
+            for (int col = 0; col < m_columns; col++)
+                res[col, row] = cofactor(row, col) / det();
+
+        return res;
+    };
 
     bool canInvert() const { return !(det() == 0); };
 };
