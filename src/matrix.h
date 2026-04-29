@@ -86,12 +86,23 @@ template <typename T> struct Matrix {
         return Matrix(new_dim, new_dim, resVec);
     };
 
-    // Two by two determinant
     T det() const {
-        return (*this)[0, 0] * (*this)[1, 1] - (*this)[0, 1] * (*this)[1, 0];
+        if (m_columns != m_rows)
+            throw std::invalid_argument(
+                "Determinant allowed only for square matrices");
+
+        T det = 0;
+
+        if (this->m_columns == 2)
+            return (*this)[0, 0] * (*this)[1, 1] -
+                   (*this)[0, 1] * (*this)[1, 0];
+
+        for (int i = 0; i < m_columns; i++)
+            det += (*this)[0, i] * cofactor(0, i);
+
+        return det;
     };
 
-    // Works only on three by three matrices for now
     T minor(int row, int column) const {
         return this->submatrix(row, column).det();
     }
@@ -103,7 +114,10 @@ template <typename T> struct Matrix {
     }
 
     Matrix transpose();
+
     Matrix invert();
+
+    bool canInvert() const { return !(det() == 0); };
 };
 
 Tuple operator*(const Matrix<double> &, const Tuple &);

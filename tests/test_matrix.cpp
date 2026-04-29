@@ -158,3 +158,19 @@ TEST(Matrix, fourByFourDeterminant) {
     EXPECT_EQ(A.cofactor(0, 3), 51);
     EXPECT_EQ(A.det(), -4071);
 }
+
+TEST(Matrix, canInvertTrue) {
+    Matrix A = Matrix(4, 4,
+                      std::vector<double>(
+                          {6, 4, 4, 4, 5, 5, 7, 6, 4, -9, 3, -7, 9, 1, 7, -6}));
+    EXPECT_EQ(A.det(), -2120);
+    EXPECT_TRUE(A.canInvert());
+}
+
+TEST(Matrix, canInvertFalse) {
+    Matrix A = Matrix(4, 4,
+                      std::vector<double>({-4, 2, -2, -3, 9, 6, 2, 6, 0, -5, 1,
+                                           -5, 0, 0, 0, 0}));
+    EXPECT_EQ(A.det(), 0);
+    EXPECT_FALSE(A.canInvert());
+}
