@@ -1,3 +1,3 @@
 ## raytracer challenge
 
-Raytracer challenge book🤣 
+Repo with my implementation of a raytracer based on "The Raytracer Challenge" book.
