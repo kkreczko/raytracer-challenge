@@ -241,20 +241,20 @@ TEST(Matrix, multiplyByInverse) {
 }
 
 TEST(Matrix, translationWithPoint) {
-    Matrix transform = Matrix<double>::translation(5, -3, 2);
+    Matrix<double> transform = Matrix<double>::translation(5, -3, 2);
     Point p = Point(-3, 4, 5);
     EXPECT_EQ(transform * p, Point(2, 1, 7));
 }
 
 TEST(Matrix, translationInverseWithPoint) {
-    Matrix transform = Matrix<double>::translation(5, -3, 2);
+    Matrix<double> transform = Matrix<double>::translation(5, -3, 2);
     Matrix inv = transform.inverse();
     Point p = Point(-3, 4, 5);
     EXPECT_EQ(inv * p, Point(-8, 7, 3));
 }
 
 TEST(Matrix, translationWithVector) {
-    Matrix transform = Matrix<double>::translation(5, -3, 2);
+    Matrix<double> transform = Matrix<double>::translation(5, -3, 2);
     Vector v = Vector(-3, 4, 5);
     EXPECT_EQ(transform * v, v);
 }

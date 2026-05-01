@@ -131,7 +131,13 @@ template <typename T> struct Matrix {
 
     bool canInvert(T determinant) const { return !(determinant == 0); };
 
-    static Matrix<T> translation(T x, T y, T z);
+    static Matrix translation(T x, T y, T z) {
+        Matrix<T> t = ident(4);
+        t[0, 3] = x;
+        t[1, 3] = y;
+        t[2, 3] = z;
+        return t;
+    };
 };
 
 Tuple operator*(const Matrix<double> &, const Tuple &);
