@@ -114,7 +114,9 @@ template <typename T> struct Matrix {
     }
 
     Matrix inverse() const {
-        if (!canInvert())
+        T determinant = det();
+
+        if (!canInvert(determinant))
             throw std::invalid_argument("Matrix not possible to inverse");
 
         Matrix res =
@@ -122,12 +124,12 @@ template <typename T> struct Matrix {
 
         for (int row = 0; row < m_rows; row++)
             for (int col = 0; col < m_columns; col++)
-                res[col, row] = cofactor(row, col) / det();
+                res[col, row] = cofactor(row, col) / determinant;
 
         return res;
     };
 
-    bool canInvert() const { return !(det() == 0); };
+    bool canInvert(T determinant) const { return !(determinant == 0); };
 };
 
 Tuple operator*(const Matrix<double> &, const Tuple &);
