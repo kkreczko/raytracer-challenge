@@ -138,6 +138,14 @@ template <typename T> struct Matrix {
         t[2, 3] = z;
         return t;
     };
+
+    static Matrix scaling(T x, T y, T z) {
+        Matrix<T> t = ident(4);
+        t[0, 0] = x;
+        t[1, 1] = y;
+        t[2, 2] = z;
+        return t;
+    };
 };
 
 Tuple operator*(const Matrix<double> &, const Tuple &);

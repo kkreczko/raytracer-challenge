@@ -258,3 +258,22 @@ TEST(Matrix, translationWithVector) {
     Vector v = Vector(-3, 4, 5);
     EXPECT_EQ(transform * v, v);
 }
+
+TEST(Matrix, scalingWithPoint) {
+    Matrix<double> transform = Matrix<double>::scaling(2, 3, 4);
+    Point p = Point(-4, 6, 8);
+    EXPECT_EQ(transform * p, Point(-8, 18, 32));
+}
+
+TEST(Matrix, scalingWithVector) {
+    Matrix<double> transform = Matrix<double>::scaling(2, 3, 4);
+    Vector v = Vector(-4, 6, 8);
+    EXPECT_EQ(transform * v, Vector(-8, 18, 32));
+}
+
+TEST(Matrix, scalingShrink) {
+    Matrix<double> transform = Matrix<double>::scaling(2, 3, 4);
+    Matrix inv = transform.inverse();
+    Vector v = Vector(-4, 6, 8);
+    EXPECT_EQ(inv * v, Vector(-2, 2, 2));
+}
