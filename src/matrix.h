@@ -130,6 +130,8 @@ template <typename T> struct Matrix {
     };
 
     bool canInvert(T determinant) const { return !(determinant == 0); };
+
+    static Matrix<T> translation(T x, T y, T z);
 };
 
 Tuple operator*(const Matrix<double> &, const Tuple &);
