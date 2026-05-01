@@ -277,3 +277,9 @@ TEST(Matrix, scalingShrink) {
     Vector v = Vector(-4, 6, 8);
     EXPECT_EQ(inv * v, Vector(-2, 2, 2));
 }
+
+TEST(Matrix, scalingReflect) {
+    Matrix<double> transform = Matrix<double>::scaling(-1, 1, 1);
+    Point p = Point(2, 3, 4);
+    EXPECT_EQ(transform * p, Point(-2, 3, 4));
+}
