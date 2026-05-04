@@ -23,8 +23,8 @@ struct Tuple {
     constexpr Tuple(double x, double y, double z, double w)
         : m_x(x), m_y(y), m_z(z), m_w(w) {}
 
-    constexpr bool isPoint() const { return m_w == 1.0; }
-    constexpr bool isVector() const { return m_w == 0.0; }
+    bool isPoint() const { return m_w == 1.0; }
+    bool isVector() const { return m_w == 0.0; }
 
     bool operator==(const Tuple &rhs) const;
 
