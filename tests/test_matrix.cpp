@@ -1,5 +1,6 @@
 #include "../src/matrix.h"
 #include <gtest/gtest.h>
+#include <numbers>
 #include <vector>
 
 TEST(Matrix, basicMatrix) {
@@ -282,4 +283,38 @@ TEST(Matrix, scalingReflect) {
     Matrix<double> transform = Matrix<double>::scaling(-1, 1, 1);
     Point p = Point(2, 3, 4);
     EXPECT_EQ(transform * p, Point(-2, 3, 4));
+}
+
+TEST(Matrix, xAxisRotation) {
+    Point p = Point(0, 1, 0);
+    Matrix half_quarter = Matrix<double>::rotation_x(std::numbers::pi / 4);
+    Matrix full_quarter = Matrix<double>::rotation_x(std::numbers::pi / 2);
+    EXPECT_EQ(half_quarter * p,
+              Point(0, std::pow(2, 0.5) / 2, std::pow(2, 0.5) / 2));
+    EXPECT_EQ(full_quarter * p, Point(0, 0, 1));
+}
+
+TEST(Matrix, xAxisRotationInverse) {
+    Point p = Point(0, 1, 0);
+    Matrix half_quarter = Matrix<double>::rotation_x(std::numbers::pi / 4);
+    Matrix inv = half_quarter.inverse();
+    EXPECT_EQ(inv * p, Point(0, std::pow(2, 0.5) / 2, -std::pow(2, 0.5) / 2));
+}
+
+TEST(Matrix, yAxisRotation) {
+    Point p = Point(0, 0, 1);
+    Matrix half_quarter = Matrix<double>::rotation_y(std::numbers::pi / 4);
+    Matrix full_quarter = Matrix<double>::rotation_y(std::numbers::pi / 2);
+    EXPECT_EQ(half_quarter * p,
+              Point(std::pow(2, 0.5) / 2, 0, std::pow(2, 0.5) / 2));
+    EXPECT_EQ(full_quarter * p, Point(1, 0, 0));
+}
+
+TEST(Matrix, zAxisRotation) {
+    Point p = Point(0, 1, 0);
+    Matrix half_quarter = Matrix<double>::rotation_z(std::numbers::pi / 4);
+    Matrix full_quarter = Matrix<double>::rotation_z(std::numbers::pi / 2);
+    EXPECT_EQ(half_quarter * p,
+              Point(-std::pow(2, 0.5) / 2, std::pow(2, 0.5) / 2, 0));
+    EXPECT_EQ(full_quarter * p, Point(-1, 0, 0));
 }

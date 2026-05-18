@@ -1,6 +1,8 @@
 #ifndef MATRIX_H
 #define MATRIX_H
 
+#include <cmath>
+#include <numbers>
 #include <stdexcept>
 #include <vector>
 
@@ -146,6 +148,33 @@ template <typename T> struct Matrix {
         t[2, 2] = z;
         return t;
     };
+
+    static Matrix<T> rotation_x(double radians) {
+        Matrix<T> t = ident(4);
+        t[1, 1] = std::cos(radians);
+        t[1, 2] = -std::sin(radians);
+        t[2, 1] = std::sin(radians);
+        t[2, 2] = std::cos(radians);
+        return t;
+    }
+
+    static Matrix rotation_y(double radians) {
+        Matrix<T> t = ident(4);
+        t[0, 0] = std::cos(radians);
+        t[0, 2] = std::sin(radians);
+        t[2, 0] = -std::sin(radians);
+        t[2, 2] = std::cos(radians);
+        return t;
+    }
+
+    static Matrix rotation_z(double radians) {
+        Matrix<T> t = ident(4);
+        t[0, 0] = std::cos(radians);
+        t[0, 1] = -std::sin(radians);
+        t[1, 0] = std::sin(radians);
+        t[1, 1] = std::cos(radians);
+        return t;
+    }
 };
 
 Tuple operator*(const Matrix<double> &, const Tuple &);
