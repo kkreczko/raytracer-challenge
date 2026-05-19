@@ -318,3 +318,39 @@ TEST(Matrix, zAxisRotation) {
               Point(-std::pow(2, 0.5) / 2, std::pow(2, 0.5) / 2, 0));
     EXPECT_EQ(full_quarter * p, Point(-1, 0, 0));
 }
+
+TEST(Matrix, shearingFirst) {
+    Matrix transform = Matrix<double>::shearing(1, 0, 0, 0, 0, 0);
+    Point p = Point(2, 3, 4);
+    EXPECT_EQ(transform * p, Point(5, 3, 4));
+}
+
+TEST(Matrix, shearingSecond) {
+    Matrix transform = Matrix<double>::shearing(0, 1, 0, 0, 0, 0);
+    Point p = Point(2, 3, 4);
+    EXPECT_EQ(transform * p, Point(6, 3, 4));
+}
+
+TEST(Matrix, shearingThird) {
+    Matrix transform = Matrix<double>::shearing(0, 0, 1, 0, 0, 0);
+    Point p = Point(2, 3, 4);
+    EXPECT_EQ(transform * p, Point(2, 5, 4));
+}
+
+TEST(Matrix, shearingFourth) {
+    Matrix transform = Matrix<double>::shearing(0, 0, 0, 1, 0, 0);
+    Point p = Point(2, 3, 4);
+    EXPECT_EQ(transform * p, Point(2, 7, 4));
+}
+
+TEST(Matrix, shearingFifth) {
+    Matrix transform = Matrix<double>::shearing(0, 0, 0, 0, 1, 0);
+    Point p = Point(2, 3, 4);
+    EXPECT_EQ(transform * p, Point(2, 3, 6));
+}
+
+TEST(Matrix, shearingSixth) {
+    Matrix transform = Matrix<double>::shearing(0, 0, 0, 0, 0, 1);
+    Point p = Point(2, 3, 4);
+    EXPECT_EQ(transform * p, Point(2, 3, 7));
+}

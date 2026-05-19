@@ -175,6 +175,18 @@ template <typename T> struct Matrix {
         t[1, 1] = std::cos(radians);
         return t;
     }
+
+    static Matrix shearing(double a, double b, double c, double d, double e,
+                           double f) {
+        Matrix<T> t = ident(4);
+        t[0, 1] = a;
+        t[0, 2] = b;
+        t[1, 0] = c;
+        t[1, 2] = d;
+        t[2, 0] = e;
+        t[2, 1] = f;
+        return t;
+    }
 };
 
 Tuple operator*(const Matrix<double> &, const Tuple &);
