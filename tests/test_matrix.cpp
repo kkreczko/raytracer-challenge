@@ -354,3 +354,25 @@ TEST(Matrix, shearingSixth) {
     Point p = Point(2, 3, 4);
     EXPECT_EQ(transform * p, Point(2, 3, 7));
 }
+
+TEST(Matrix, bigCumulatativeMatrixOps) {
+    Point p = Point(1, 0, 1);
+    Matrix A = Matrix<double>::rotation_x(std::numbers::pi / 2);
+    Matrix B = Matrix<double>::scaling(5, 5, 5);
+    Matrix C = Matrix<double>::translation(10, 5, 7);
+    Point p2 = A * p;
+    EXPECT_EQ(p2, Point(1, -1, 0));
+    Point p3 = B * p2;
+    EXPECT_EQ(p3, Point(5, -5, 0));
+    Point p4 = C * p3;
+    EXPECT_EQ(p4, Point(15, 0, 7));
+}
+
+TEST(Matrix, bigCumulatativeMatrixOpsReverse) {
+    Point p = Point(1, 0, 1);
+    Matrix A = Matrix<double>::rotation_x(std::numbers::pi / 2);
+    Matrix B = Matrix<double>::scaling(5, 5, 5);
+    Matrix C = Matrix<double>::translation(10, 5, 7);
+    Matrix T = C * B * A;
+    EXPECT_EQ(T * p, Point(15, 0, 7));
+}
