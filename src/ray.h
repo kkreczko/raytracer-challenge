@@ -7,4 +7,6 @@ struct Ray {
 
     Ray(Point origin, Vector direction)
         : m_origin(origin), m_direction(direction) {}
+
+    Point position(double distance) const;
 };
